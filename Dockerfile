@@ -6,8 +6,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y git curl && curl 
 
 ARG user=jenkins
 ARG group=jenkins
-ARG uid=1000
-ARG gid=1000
+ARG uid=1002
+ARG gid=1002
 ARG http_port=8080
 ARG agent_port=50000
 ARG JENKINS_HOME=/var/jenkins_home
