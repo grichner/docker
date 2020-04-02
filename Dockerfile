@@ -13,6 +13,16 @@ ARG agent_port=50000
 ARG JENKINS_HOME=/var/jenkins_home
 ARG REF=/usr/share/jenkins/ref
 
+ARG http_proxy=http://10.180.57.120:3128
+ARG https_proxy=http://10.180.57.120:3128
+ARG HTTP_PROXY=http://10.180.57.120:3128
+ARG HTTPS_PROXY=http://10.180.57.120:3128
+
+ENV http_proxy $http_proxy
+ENV https_proxy $https_proxy
+ENV HTTP_PROXY $HTTP_PROXY
+ENV HTTPS_PROXY $HTTPS_PROXY
+
 ENV JENKINS_HOME $JENKINS_HOME
 ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 ENV REF $REF

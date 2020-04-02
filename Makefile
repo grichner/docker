@@ -10,25 +10,25 @@ shellcheck:
 build: build-debian build-alpine build-slim build-jdk11 build-centos build-openj9 build-openj9-jdk11
 
 build-debian:
-	docker build --file Dockerfile .
+	docker build --file Dockerfile --tag tai-docker-stage-dev-local.bahnhub.tech.rz.db.de/jenkins-lts:`date "+%Y%m%d%H%M"` .
 
 build-alpine:
-	docker build --file Dockerfile-alpine .
+	docker build --file Dockerfile-alpine --tag tai-docker-stage-dev-local.bahnhub.tech.rz.db.de/jenkins-alpine-lts:`date "+%Y%m%d%H%M"` .
 
 build-slim:
-	docker build --file Dockerfile-slim .
+	docker build --file Dockerfile-slim --tag tai-docker-stage-dev-local.bahnhub.tech.rz.db.de/jenkins-slim-lts:`date "+%Y%m%d%H%M"` .
 
 build-jdk11:
-	docker build --file Dockerfile-jdk11 .
+	docker build --file Dockerfile-jdk11 --tag tai-docker-stage-dev-local.bahnhub.tech.rz.db.de/jenkins-jdk11-lts:`date "+%Y%m%d%H%M"` .
 
 build-centos:
-	docker build --file Dockerfile-centos .
+	docker build --file Dockerfile-centos --tag tai-docker-stage-dev-local.bahnhub.tech.rz.db.de/jenkins-centos-lts:`date "+%Y%m%d%H%M"` .
 
 build-openj9:
-	docker build --file Dockerfile-openj9 .
+	docker build --file Dockerfile-openj9 --tag tai-docker-stage-dev-local.bahnhub.tech.rz.db.de/jenkins-openj9-lts:`date "+%Y%m%d%H%M"` .
 
 build-openj9-jdk11:
-	docker build --file Dockerfile-openj9-jdk11 .
+	docker build --file Dockerfile-openj9-jdk11 --tag tai-docker-stage-dev-local.bahnhub.tech.rz.db.de/jenkins-openj9-jdk11-lts:`date "+%Y%m%d%H%M"` .
 
 bats:
 	# Latest tag is unfortunately 0.4.0 which is quite older than the latest master tip.
