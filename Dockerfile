@@ -2,7 +2,8 @@ FROM openjdk:8-jdk-stretch
 
 # Install git lfs on Debian stretch per https://github.com/git-lfs/git-lfs/wiki/Installation#debian-and-ubuntu
 # Avoid JENKINS-59569 - git LFS 2.7.1 fails clone with reference repository
-RUN apt-get update && apt-get upgrade -y && apt-get install -y git curl && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && apt-get install -y git-lfs && git lfs install && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get upgrade -y && apt-get install -y locales git curl && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && apt-get install -y git-lfs && git lfs install && rm -rf /var/lib/apt/lists/*
+RUN echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 
 ARG user=jenkins
 ARG group=jenkins
@@ -13,6 +14,10 @@ ARG agent_port=50000
 ARG JENKINS_HOME=/var/jenkins_home
 ARG REF=/usr/share/jenkins/ref
 
+ARG LANG=de_DE.UTF-8
+ENV LANG $LANG
+
+##------Your Proxy IP here ------##
 ARG http_proxy=http://10.180.57.120:3128
 ARG https_proxy=http://10.180.57.120:3128
 ARG HTTP_PROXY=http://10.180.57.120:3128
