@@ -3,7 +3,9 @@ FROM openjdk:8-jdk-stretch
 # Install git lfs on Debian stretch per https://github.com/git-lfs/git-lfs/wiki/Installation#debian-and-ubuntu
 # Avoid JENKINS-59569 - git LFS 2.7.1 fails clone with reference repository
 RUN apt-get update && apt-get upgrade -y && apt-get install -y locales git curl && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && apt-get install -y git-lfs && git lfs install && rm -rf /var/lib/apt/lists/*
+
 RUN echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
+RUN rm -f /etc/localtime && ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 ARG user=jenkins
 ARG group=jenkins
@@ -61,11 +63,12 @@ RUN curl -fsSL https://github.com/krallin/tini/releases/download/${TINI_VERSION}
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.176.4}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.222.3}
 
 # jenkins.war checksum, download will be validated using it (sha256sum)
 #ARG JENKINS_SHA=33a6c3161cf8de9c8729fd83914d781319fd1569acf487c7b1121681dba190a5
-ARG JENKINS_SHA=8186fd4a9a43088f52c8e98da3ea314562c60c2ee25027e5d9ff4160cee24e80
+ARG JENKINS_SHA=1529d642e29e74f65369ff5611935e9361065d9e8f65344a64912c5660cc0781
+
 
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
